@@ -40,7 +40,15 @@
     <!-- End Authors -->
 
     <!-- use the video ./figs/videomimic_teaser.mp4 -->
-    <video id="teaser-video" src="./figs/videomimic_teaser.mp4" width="100%" height="100%" controls muted playsinline autoplay></video>
+    <iframe 
+    id="teaser-video"
+      width="100%" 
+      height="100%" 
+      src="https://youtu.be/n6bE0AByNUM" 
+      frameborder="0" 
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+      allowfullscreen>
+    </iframe>
     <!-- Caption for Figure 1 (Teaser Video) -->
     <p class="figure-caption">
         <span style="font-variant: small-caps;">VideoMimic</span> is a real-to-sim-to-real pipeline that converts monocular videos into transferable humanoid skills, letting robots learn context-aware behaviors (terrain-traversing, climbing, sitting) in a single policy.
@@ -172,6 +180,7 @@
     <p class="figure-caption">
       <b>Figure 1: Method Overview.</b> (a) Curriculum-based training over 8 representative terrains enhances generalization. (b) Realistic voxel path alignment achieved via efficient LiDAR simulation with domain-randomized latency and noise. (c) A 2D CNN-based perceptual module processes voxel grid using the z-dimension as input channels, balancing efficiency and representation capability. (d) A latent-aware PPO policy enables zero-shot sim-to-real transfer across diverse obstacles, including ground, lateral, and overhead challenges.
     </p>
+    
 
     <div class="additional-video-row">
       <video class="additional-video-item" src="sim/video1.mp4" autoplay muted playsinline loop></video>
@@ -189,6 +198,9 @@
   <video class="additional-video-item" src="sim/video7.mp4" autoplay muted playsinline loop></video>
   <video class="additional-video-item" src="sim/video8.mp4" autoplay muted playsinline loop></video>
 </div>
+<p class="figure-caption gallery-caption">
+  <b>Platform Stepping and Gap Traversing:</b> The robot steps on 30cm platform, traverses 30cm/35cm/40cm gap, and steps down the platform from left to right.
+</p>
 
 
     <div class="tagline" id="result">Results.</div>
