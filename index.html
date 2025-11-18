@@ -73,6 +73,7 @@
           <!-- Videos remain here - ADD autoplay -->
           <video class="gallery-video" src="./doorceiling/video1.mp4" autoplay muted playsinline loop></video>
           <video class="gallery-video" src="./doorceiling/video2.mp4" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="./doorceiling/video3.mp4" autoplay muted playsinline loop></video>
           <!-- <video class="gallery-video" src="./stairs/7.mp4" autoplay muted playsinline loop></video> -->
           <!-- <video class="gallery-video" src="./stairs/4.mp4" autoplay muted playsinline loop></video>
           <video class="gallery-video" src="./stairs/5.mp4" autoplay muted playsinline loop></video>
@@ -105,6 +106,7 @@
         <video class="gallery-video" src="./platform/video1.mp4" autoplay muted playsinline loop></video>
         <video class="gallery-video" src="./platform/video2.mp4" autoplay muted playsinline loop></video>
         <video class="gallery-video" src="./platform/video3.mp4" autoplay muted playsinline loop></video>
+        <!-- <video class="gallery-video" src="./platform/video4.mp4" autoplay muted playsinline loop></video> -->
         <!-- <video class="gallery-video" src="./sitting/3.mp4" autoplay muted playsinline loop></video>
         <video class="gallery-video" src="./sitting/1.mp4" autoplay muted playsinline loop></video>
         <video class="gallery-video" src="./sitting/2.mp4" autoplay muted playsinline loop></video>
@@ -137,6 +139,7 @@
           <video class="gallery-video" src="./stair/video2.mp4" autoplay muted playsinline loop></video>
           <video class="gallery-video" src="./stair/video3.mp4" autoplay muted playsinline loop></video>
           <video class="gallery-video" src="./stair/video4.mp4" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="./stair/video5.mp4" autoplay muted playsinline loop></video>
           <!-- <video class="gallery-video" src="./traversing/5.mp4" autoplay muted playsinline loop></video>
           <video class="gallery-video" src="./traversing/7.mp4" autoplay muted playsinline loop></video>
           <video class="gallery-video" src="./traversing/4.mp4" autoplay muted playsinline loop></video>
@@ -155,10 +158,44 @@
           </div>
           <!-- Caption text -->
           <p class="figure-caption gallery-caption">
-              <b>Stair Ascending and Descending:</b> The robot ascends and descend stairs. (left side: 15cm; right side: 20cm)
+              <b>Stair Ascending/Descending and Pile:</b> The robot ascends and descend stairs (left side: 15cm; right side: 20cm) and traverses piles.
           </p>
       </div>
     </div>
+
+    <div class="video-gallery-section" id="traversingGallerySection">
+      <div class="video-gallery-container">
+        <div class="video-gallery" id="videoGalleryTraversing">
+          <!-- Videos remain here - ADD autoplay -->
+          <video class="gallery-video" src="./voxel/video1.mp4" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="./voxel/video2.mp4" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="./voxel/video3.mp4" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="./voxel/video4.mp4" autoplay muted playsinline loop></video>
+          <!-- <video class="gallery-video" src="./traversing/5.mp4" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="./traversing/7.mp4" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="./traversing/4.mp4" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="./traversing/2.mp4" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="./traversing/6.mp4" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="./traversing/3.mp4" autoplay muted playsinline loop></video> -->
+          <!-- Add more videos as needed, ensuring they have autoplay muted loop -->
+        </div>
+      </div>
+      <!-- Container for the caption AND buttons -->
+      <div class="gallery-caption-container">
+          <!-- Move button controls INSIDE caption container -->
+          <div class="gallery-nav-controls">
+              <button class="gallery-nav left" id="scrollLeftBtnTraversing">&lt;</button>
+              <button class="gallery-nav right" id="scrollRightBtnTraversing">&gt;</button>
+          </div>
+          <!-- Caption text -->
+          <p class="figure-caption gallery-caption">
+              <b>Visualization of Voxel Grid in Locomotion.</b> From left to right: 1. Door and Ceiling; 2. Platform and Gap; 3. Stairs; 4. Pile.
+          </p>
+      </div>
+    </div>
+
+
+
   <!-- End Video Gallery Section -->
     <div class="tagline" id="approach">Approach.</div>
 
@@ -191,6 +228,20 @@
   <video class="additional-video-item" src="sim/video8.mp4" autoplay muted playsinline loop></video>
 </div>
 
+<div style="margin-top:20px; text-align:center;">
+<p class="figure-caption gallery-caption" style="text-align:center";>
+  <b>Visualization of Robot Training in Representative Terrain Types.</b>
+</p>
+</div>
+
+
+
+
+
+
+
+
+
 
     <div class="tagline" id="result">Results.</div>
     <a id="figure-3-img" href="figs/3.png" download="3.png">
@@ -198,7 +249,7 @@
     </a>
     <!-- Caption for Figure 3 -->
     <p class="figure-caption">
-      <b>Figure 2:</b> Policy training pipeline in simulation, progressing from MoCap pre-training to environment-aware tracking and distillation.
+      <b>Figure 2:</b> Ablation experiment results of Gallant, \(E_{succ}\) is the terrain traversal success rate, \(E_{collision}\) describes the average impulse of collisions during traversal. Experiments show that Gallant's design yields higher success rate and fewer collisions.
     </p>
 
     <a id="figure-3-img" href="figs/3.png" download="3.png">
@@ -206,7 +257,7 @@
     </a>
     <!-- Caption for Figure 3 -->
     <p class="figure-caption">
-      <b>Figure 3:</b> Policy training pipeline in simulation, progressing from MoCap pre-training to environment-aware tracking and distillation.
+      <b>Figure 3:</b> Comparison of success rates between Gallant and baselines in real-world deployment demonstrates that Gallant's design, utilizing voxel grids and domain randomization for LiDAR, is essential.
     </p>
 
 
@@ -452,6 +503,9 @@
       });
     });
   </script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 </body>
 </html>
