@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Gallant</title>
+  <link rel="icon" href="./figs/icon.png" type="image/png">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="toc">
+    <h3>Content</h3>
+    <hr>
+    <ul>
+      <li><a href="#abstract">Abstract</a></li>
+      <li><a href="#real-world">Real-world Demo</a></li>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#result">Results</a></li>
+      <li><a href="#acknowledgements">Acknowledgements</a></li>
+    </ul>
+  </div>
+
+  <div class="main-content">
+    <div class="hero-text">Gallant</div>
+    <div class="sub-hero-text">Voxel Grid-based Humanoid Locomotion and Local-navigation across 3D Constrained Terrains</div>
+
+    <!-- Add Authors -->
+    <div class="authors">
+      <a href="https://www.qingweiben.com/" target="_blank">Qingwei Ben*</a>, <a href="https://scholar.google.com/citations?user=OLLsgKIAAAAJ&hl=en" target="_blank">Botian Xu*</a>, <a href="https://kailinli.top/" target="_blank">Kailin Li*</a>, <a href="https://trap-1.github.io/" target="_blank">Feiyu Jia</a>, <a href="https://zwt006.github.io/" target="_blank">Wentao Zhang</a>, <a href="https://scholar.google.com/citations?user=YmnK82wAAAAJ&hl=zh-CN" target="_blank">Jingping Wang</a>,<br>
+      <a href="https://wangjingbo1219.github.io/" target="_blank">Jingbo Wang</a>, <a href="http://dahua.site/" target="_blank">Dahua Lin</a>, <a href="https://oceanpang.github.io/" target="_blank">Jiangmiao Pang.</a>
+      &nbsp;&nbsp;(*: equal contribution)
+      <span class="affiliation">Shanghai Artificial Intelligence Laboratory</span>
+      <span class="affiliation">The Chinese University of Hong Kong</span>
+      <span class="affiliation">University of Science and Technology of China</span>
+      <span class="affiliation">University of Tokyo</span>
+      <span class="affiliation">Shanghai Jiao Tong University</span>
+      
+      <!-- <span class="affiliation" style="color: #555; text-align: center; font-size: 20px; margin-top: 6px;">CoRL 2025, Best Student Paper Award</span> -->
+    </div>
+    <!-- End Authors -->
+
+    <!-- use the video ./figs/videomimic_teaser.mp4 -->
+    <video id="teaser-video" src="./figs/videomimic_teaser.mp4" width="100%" height="100%" controls muted playsinline autoplay></video>
+    <!-- Caption for Figure 1 (Teaser Video) -->
+    <p class="figure-caption">
+        <span style="font-variant: small-caps;">VideoMimic</span> is a real-to-sim-to-real pipeline that converts monocular videos into transferable humanoid skills, letting robots learn context-aware behaviors (terrain-traversing, climbing, sitting) in a single policy.
+    </p>
+
+    <!-- Add Quick Links Here -->
+    <div class="quick-links">
+      <a href="./Gallant.pdf" target="_blank">[pdf]</a>
+      <a href="" target="_blank">[arxiv]</a>
+      <a href="">[code]</a> 
+      <!-- <a href="#gallery-section-anchor">[gallery]</a> -->
+    </div>
+    
+    <div class="tagline" id="abstract">Abstract.</div>
+
+
+    <div class="section">
+      Robust humanoid locomotion requires accurate and globally consistent perception of the surrounding 3D environment. However, existing perception modules, mainly based on depth images or elevation maps, offer only partial and locally flattened views of the environment, failing to capture the full 3D structure.
+      This paper presents <span style="font-variant: small-caps;">Gallant</span>, a voxel-grid-based framework for humanoid locomotion and local navigation in 3D constrained terrains.
+      It leverages voxelized LiDAR data as a lightweight and structured perceptual representation, and employs a z-grouped 2D CNN to map this representation to the control policy, enabling fully end-to-end optimization. A high-fidelity LiDAR simulation that dynamically generates realistic observations is developed to support scalable, LiDAR-based training and ensure sim-to-real consistency.
+      Experimental results show that <span style="font-variant: small-caps;">Gallant</span>'s broader perceptual coverage facilitates the use of a single policy that goes beyond the limitations of previous methods confined to ground-level obstacles, extending to lateral clutter, overhead constraints, multi-level structures, and narrow passages. Gallant also firstly achieves near-100% success rates in challenging scenarios such as stair climbing and stepping onto elevated platforms through improved end-to-end optimization.
+    
+    </div> 
+
+    <div class="tagline" id="real-world">Real World Demo.</div>
+    <!-- Video Gallery Section - STAIRS VIDEOS -->
+    <div class="video-gallery-section" id="stairsGallerySection">
+      <div class="video-gallery-container">
+        <div class="video-gallery" id="videoGalleryStairs">
+          <!-- Videos remain here - ADD autoplay -->
+          <video class="gallery-video" src="./doorceiling/video1.mp4" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="./doorceiling/video2.mp4" autoplay muted playsinline loop></video>
+          <!-- <video class="gallery-video" src="./stairs/7.mp4" autoplay muted playsinline loop></video> -->
+          <!-- <video class="gallery-video" src="./stairs/4.mp4" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="./stairs/5.mp4" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="./stairs/6.mp4" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="./stairs/3.mp4" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="./stairs/8.mp4" autoplay muted playsinline loop></video> -->
+          <!-- Add more videos as needed, ensuring they have autoplay muted loop -->
+        </div>
+      </div>
+      <!-- Container for the caption AND buttons -->
+      <div class="gallery-caption-container">
+          <!-- Move button controls INSIDE caption container -->
+          <div class="gallery-nav-controls">
+              <button class="gallery-nav left" id="scrollLeftBtnStairs">&lt;</button>
+              <button class="gallery-nav right" id="scrollRightBtnStairs">&gt;</button>
+          </div>
+          <!-- Caption text -->
+          <p class="figure-caption gallery-caption">
+              <b>Door and Ceiling Traversing:</b> The robot conducts local-navigation to avoid lateral obstacles, and ducks to cross overheading obstacles.
+          </p>
+      </div>
+    </div>
+  <!-- End Video Gallery Section -->
+
+  <!-- Video Gallery Section - SITTING VIDEOS -->
+  <div class="video-gallery-section" id="gallery-section-anchor">
+    <div class="video-gallery-container">
+      <div class="video-gallery" id="videoGallerySitting">
+        <!-- Videos remain here - ADD autoplay -->
+        <video class="gallery-video" src="./platform/video1.mp4" autoplay muted playsinline loop></video>
+        <video class="gallery-video" src="./platform/video2.mp4" autoplay muted playsinline loop></video>
+        <video class="gallery-video" src="./platform/video3.mp4" autoplay muted playsinline loop></video>
+        <!-- <video class="gallery-video" src="./sitting/3.mp4" autoplay muted playsinline loop></video>
+        <video class="gallery-video" src="./sitting/1.mp4" autoplay muted playsinline loop></video>
+        <video class="gallery-video" src="./sitting/2.mp4" autoplay muted playsinline loop></video>
+        <video class="gallery-video" src="./sitting/4.mp4" autoplay muted playsinline loop></video>
+        <video class="gallery-video" src="./sitting/0.mp4" autoplay muted playsinline loop></video> -->
+        <!-- Add more videos as needed, ensuring they have autoplay muted loop -->
+      </div>
+    </div>
+    <!-- Container for the caption AND buttons -->
+    <div class="gallery-caption-container">
+        <!-- Move button controls INSIDE caption container -->
+        <div class="gallery-nav-controls">
+            <button class="gallery-nav left" id="scrollLeftBtnSitting">&lt;</button>
+            <button class="gallery-nav right" id="scrollRightBtnSitting">&gt;</button>
+        </div>
+        <!-- Caption text -->
+        <p class="figure-caption gallery-caption">
+            <b>Platform Stepping and Gap Traversing:</b> The robot steps on 30cm platform, traverses 30cm/35cm/40cm gap, and steps down the platform from left to right.
+        </p>
+    </div>
+  </div>
+  <!-- End Video Gallery Section -->
+
+  <!-- Video Gallery Section - TRAVERSING VIDEOS -->
+    <div class="video-gallery-section" id="traversingGallerySection">
+      <div class="video-gallery-container">
+        <div class="video-gallery" id="videoGalleryTraversing">
+          <!-- Videos remain here - ADD autoplay -->
+          <video class="gallery-video" src="./stair/video1.mp4" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="./stair/video2.mp4" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="./stair/video3.mp4" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="./stair/video4.mp4" autoplay muted playsinline loop></video>
+          <!-- <video class="gallery-video" src="./traversing/5.mp4" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="./traversing/7.mp4" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="./traversing/4.mp4" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="./traversing/2.mp4" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="./traversing/6.mp4" autoplay muted playsinline loop></video>
+          <video class="gallery-video" src="./traversing/3.mp4" autoplay muted playsinline loop></video> -->
+          <!-- Add more videos as needed, ensuring they have autoplay muted loop -->
+        </div>
+      </div>
+      <!-- Container for the caption AND buttons -->
+      <div class="gallery-caption-container">
+          <!-- Move button controls INSIDE caption container -->
+          <div class="gallery-nav-controls">
+              <button class="gallery-nav left" id="scrollLeftBtnTraversing">&lt;</button>
+              <button class="gallery-nav right" id="scrollRightBtnTraversing">&gt;</button>
+          </div>
+          <!-- Caption text -->
+          <p class="figure-caption gallery-caption">
+              <b>Stair Ascending and Descending:</b> The robot ascends and descend stairs. (left side: 15cm; right side: 20cm)
+          </p>
+      </div>
+    </div>
+  <!-- End Video Gallery Section -->
+    <div class="tagline" id="approach">Approach.</div>
+
+    
+
+
+    <a id="figure-3-img" href="figs/3.png" download="3.png">
+      <img src="figs/overview.svg" alt="Training in Sim">
+    </a>
+    <!-- Caption for Figure 3 -->
+    <p class="figure-caption">
+      <b>Figure 1: Method Overview.</b> (a) Curriculum-based training over 8 representative terrains enhances generalization. (b) Realistic voxel path alignment achieved via efficient LiDAR simulation with domain-randomized latency and noise. (c) A 2D CNN-based perceptual module processes voxel grid using the z-dimension as input channels, balancing efficiency and representation capability. (d) A latent-aware PPO policy enables zero-shot sim-to-real transfer across diverse obstacles, including ground, lateral, and overhead challenges.
+    </p>
+
+    <div class="additional-video-row">
+      <video class="additional-video-item" src="sim/video1.mp4" autoplay muted playsinline loop></video>
+      <video class="additional-video-item" src="sim/video3.mp4" autoplay muted playsinline loop></video>
+  </div>
+  <div class="additional-video-row" style="margin-top: 20px;">
+      <video class="additional-video-item" src="sim/video2.mp4" autoplay muted playsinline loop></video>
+      <video class="additional-video-item" src="sim/video4.mp4" autoplay muted playsinline loop></video>
+  </div>
+  <div class="additional-video-row" style="margin-top: 20px;">
+    <video class="additional-video-item" src="sim/video5.mp4" autoplay muted playsinline loop></video>
+    <video class="additional-video-item" src="sim/video6.mp4" autoplay muted playsinline loop></video>
+</div>
+<div class="additional-video-row" style="margin-top: 20px;">
+  <video class="additional-video-item" src="sim/video7.mp4" autoplay muted playsinline loop></video>
+  <video class="additional-video-item" src="sim/video8.mp4" autoplay muted playsinline loop></video>
+</div>
+
+
+    <div class="tagline" id="result">Results.</div>
+    <a id="figure-3-img" href="figs/3.png" download="3.png">
+      <img src="figs/aa.svg" alt="Simulation Results">
+    </a>
+    <!-- Caption for Figure 3 -->
+    <p class="figure-caption">
+      <b>Figure 2:</b> Policy training pipeline in simulation, progressing from MoCap pre-training to environment-aware tracking and distillation.
+    </p>
+
+    <a id="figure-3-img" href="figs/3.png" download="3.png">
+      <img src="figs/realexp.svg" alt="Real-world Results">
+    </a>
+    <!-- Caption for Figure 3 -->
+    <p class="figure-caption">
+      <b>Figure 3:</b> Policy training pipeline in simulation, progressing from MoCap pre-training to environment-aware tracking and distillation.
+    </p>
+
+
+
+    <div class="tagline" id="acknowledgements">Acknowledgements.</div>
+    <div class="section" style="margin-top: -5px;">
+      <p>
+        We thank Huayi Wang and Moji Shi for their guidance with the deployment of elevation map. We are grateful to Junli Ren, Tao Huang, Zirui Wang, Weishuai Zeng, Weixiang Zhong, Xiaojie Niu, Shunlin Lu for helpful advice and discussions during the paper. We thank Shi Zhang, Shenghan Zhang, Quanli Xuan, Haihua Zhu, Wei Shi for their help in transforming robot's structure and building real-world terrains.
+      </p>
+    </div>
+
+    <div class="bibtex-code" id="bibtex">
+      <div class="bibtex-title">BibTeX</div>
+      <pre><code>@article{ben2025gallant,
+          title     = {Gallant: Voxel Grid-based Humanoid Locomotion and Local-navigation across 3D Constrained Terrains},
+          author    = {Qingwei Ben, Botian Xu, Kailin Li, Feiyu Jia, Wentao Zhang, Jingping Wang, Jingbo Wang, Dahua Lin, Jiangmiao Pang},
+          journal   = {arXiv preprint arXiv:2511.},
+          year      = {2025}
+        }</code></pre>
+    </div>
+
+  </div> <!-- End of main-content div -->
+
+
+  <div class="footer">
+    <!-- © UC Berkeley | Powered by vision, motion, and a little ambition. -->
+    <p>Website template modified from <a href="https://www.videomimic.net/">VideoMimic</a>.</p>
+
+  <p>If you have any problems, please drop an e-mail to <a href="elgceben@gmail.com">Qingwei Ben</a> or contact by wechat: <b>elgceben</b>.</p>
+  </div>
+
+  <!-- Teaser Video Autoplay with Delay and Loop -->
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const video = document.getElementById('teaser-video');
+    // const initialDelay = 1000; // No longer needed, autoplay attribute handles initial play
+    const loopDelay = 3000;    // 3 seconds delay before looping
+
+    // let initialPlayTimeout; // No longer needed
+    let loopTimeout;
+
+    if (video) {
+      // Ensure video is muted (already in HTML, but good practice)
+      video.muted = true;
+      // Controls are already in HTML, ensuring user can play if autoplay fails
+
+      // REMOVE JavaScript-based initial play:
+      /*
+      initialPlayTimeout = setTimeout(function() {
+        video.play().then(function() {
+          // Autoplay started
+        }).catch(function(error) {
+          console.log('Initial autoplay prevented for teaser video. User interaction might be needed.', error);
+          video.controls = true; // Ensure controls are visible
+        });
+      }, initialDelay);
+      */
+
+      // Loop with delay - this part can stay
+      video.addEventListener('ended', function() {
+        clearTimeout(loopTimeout); 
+        loopTimeout = setTimeout(function() {
+          video.currentTime = 0; 
+          video.play().catch(function(error) {
+            console.log('Delayed loop play prevented for teaser video:', error);
+          });
+        }, loopDelay);
+      });
+
+      // --- Clear Timeouts on Manual Pause ---
+      video.addEventListener('pause', function() {
+        if (!video.ended && video.currentTime > 0) {
+           // clearTimeout(initialPlayTimeout); // No longer needed
+           clearTimeout(loopTimeout);
+           console.log('Teaser video: Manual pause detected, clearing loop timeout.');
+        }
+      });
+
+      // --- Clear Timeouts on Manual Play (if paused before initial delay finishes) ---
+       video.addEventListener('play', function() {
+           // if (initialPlayTimeout) { // No longer needed
+           //     clearTimeout(initialPlayTimeout);
+           // }
+       });
+
+    } else {
+      console.error('Video element with ID "teaser-video" not found.');
+    }
+  });
+  </script>
+
+  <!-- JavaScript for Video Gallery Navigation -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const galleries = [
+        {
+          sectionId: 'gallery-section-anchor', // ID of the .video-gallery-section for sitting
+          galleryInnerId: 'videoGallerySitting',
+          scrollLeftBtnId: 'scrollLeftBtnSitting',
+          scrollRightBtnId: 'scrollRightBtnSitting'
+        },
+        {
+          sectionId: 'traversingGallerySection', // ID of the .video-gallery-section for traversing
+          galleryInnerId: 'videoGalleryTraversing',
+          scrollLeftBtnId: 'scrollLeftBtnTraversing',
+          scrollRightBtnId: 'scrollRightBtnTraversing'
+        },
+        {
+          sectionId: 'stairsGallerySection', // ID of the .video-gallery-section for stairs
+          galleryInnerId: 'videoGalleryStairs',
+          scrollLeftBtnId: 'scrollLeftBtnStairs',
+          scrollRightBtnId: 'scrollRightBtnStairs'
+        },
+        {
+          sectionId: 'reconstructionGallerySection', // ID of the .video-gallery-section for reconstruction
+          galleryInnerId: 'videoGalleryReconstruction',
+          scrollLeftBtnId: 'scrollLeftBtnReconstruction',
+          scrollRightBtnId: 'scrollRightBtnReconstruction'
+        }
+      ];
+
+      galleries.forEach(galleryConfig => {
+        const gallerySection = document.getElementById(galleryConfig.sectionId);
+        if (!gallerySection) {
+          console.error(`Gallery section with ID ${galleryConfig.sectionId} not found.`);
+          return;
+        }
+
+        const galleryContainer = gallerySection.querySelector('.video-gallery-container');
+        const galleryInner = document.getElementById(galleryConfig.galleryInnerId);
+        const scrollLeftBtn = document.getElementById(galleryConfig.scrollLeftBtnId);
+        const scrollRightBtn = document.getElementById(galleryConfig.scrollRightBtnId);
+
+        if (galleryContainer && galleryInner && scrollLeftBtn && scrollRightBtn) {
+          // Calculate the scroll amount based on the width of the first video + gap
+          const scrollAmount = (galleryInner.firstElementChild?.offsetWidth || 300) + 15; // 15 is the gap
+
+          scrollLeftBtn.addEventListener('click', () => {
+            // Scroll the CONTAINER element
+            galleryContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+          });
+
+          scrollRightBtn.addEventListener('click', () => {
+            // Scroll the CONTAINER element
+            galleryContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+          });
+
+          /* --- REMOVE OR COMMENT OUT HOVER LOGIC ---
+          // Optional: Add hover-to-play functionality for gallery videos
+          // Target videos within galleryInner
+          const galleryVideos = galleryInner.querySelectorAll('.gallery-video');
+          galleryVideos.forEach(video => {
+              video.addEventListener('mouseenter', () => {
+                  video.play().catch(e => console.log("Autoplay prevented:", e));
+              });
+              video.addEventListener('mouseleave', () => {
+                  video.pause();
+                  // video.currentTime = 0; // Optional: reset video on mouse leave
+              });
+          });
+          */ // --- END OF REMOVED HOVER LOGIC ---
+
+        } else {
+          console.error(`Gallery elements not found for navigation setup in section ${galleryConfig.sectionId}.`);
+          // Log which elements might be missing
+          if (!galleryContainer) console.error('Missing element: .video-gallery-container in section ' + galleryConfig.sectionId);
+          if (!galleryInner) console.error(`Missing element with ID ${galleryConfig.galleryInnerId}`);
+          if (!scrollLeftBtn) console.error(`Missing element with ID ${galleryConfig.scrollLeftBtnId}`);
+          if (!scrollRightBtn) console.error(`Missing element with ID ${galleryConfig.scrollRightBtnId}`);
+        }
+      });
+    });
+  </script>
+
+  <!-- JavaScript for Real-to-Sim Video Synchronization -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const videosToSync = [
+        document.querySelector('.r2s-video-input'),
+        document.querySelector('.r2s-video-smpl'),
+        document.querySelector('.r2s-video-g1'),
+        document.querySelector('.r2s-video-ego-rgb'),
+        document.querySelector('.r2s-video-ego-depth'),
+        document.querySelector('.r2s-video-sim')
+      ].filter(Boolean); // Filter out nulls if any class name is wrong or video missing
+
+      function synchronizeAndPlayR2SVideos() {
+        if (videosToSync.length === 0) {
+          console.warn('No videos found for Real-to-Sim synchronization.');
+          return;
+        }
+
+        const readyPromises = videosToSync.map(video => {
+          return new Promise((resolve, reject) => {
+            // If video is already ready (e.g., cached), resolve immediately
+            if (video.readyState >= 4) { // HAVE_ENOUGH_DATA (canplaythrough)
+              resolve();
+            } else {
+              video.addEventListener('canplaythrough', resolve, { once: true });
+              video.addEventListener('error', reject, { once: true }); // Handle potential loading errors
+            }
+          });
+        });
+
+        Promise.all(readyPromises)
+          .then(() => {
+            console.log('All Real-to-Sim videos are ready to play. Starting playback.');
+            videosToSync.forEach(video => {
+              video.currentTime = 0; // Ensure starting from the beginning
+              video.play().catch(error => {
+                console.warn(`Autoplay was prevented for video ${video.src}. User interaction might be needed.`, error);
+                // Ensure controls are visible if autoplay fails for any video
+                video.controls = true;
+              });
+            });
+          })
+          .catch(error => {
+            console.error('Error waiting for Real-to-Sim videos to be ready:', error);
+            // Optionally, provide a fallback or user message here
+            videosToSync.forEach(video => video.controls = true); // Show controls on all if any failed to load
+          });
+      }
+
+      synchronizeAndPlayR2SVideos();
+
+      // The `loop` attribute on the HTML video tags will handle continuous looping.
+      // The videos will naturally re-synchronize at their LCM due to the loop attribute
+      // if they have different durations and all successfully start.
+    });
+  </script>
+
+  <!-- JavaScript to prevent default click on specific image links -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const imageLinkIds = ['figure-1-img', 'figure-2-img', 'figure-3-img'];
+      imageLinkIds.forEach(id => {
+        const linkElement = document.getElementById(id);
+        if (linkElement) {
+          linkElement.addEventListener('click', function(event) {
+            event.preventDefault();
+          });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
